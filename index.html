@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FORM RECAPTCHA DEMO</title>
+
+    <!-- Flowbite CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeHnRcsAAAAAIbtoIZjq8F46uFlsg-kDxmXDtnn"></script>
+  </head>
+  <body class="bg-gray-50">
+    <div class="max-w-2xl mx-auto p-6">
+      <div class="bg-white rounded-lg shadow-md p-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-6">Form Submission</h1>
+
+        <form id="submissionForm" class="space-y-6">
+          <!-- Form ID -->
+          <div>
+            <label
+              for="formId"
+              class="block mb-2 text-sm font-medium text-gray-900"
+              >Form ID</label
+            >
+            <input
+              type="number"
+              id="formId"
+              name="formId"
+              required
+              value="1"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="1"
+            />
+          </div>
+
+          <!-- Country -->
+          <div>
+            <label
+              for="country"
+              class="block mb-2 text-sm font-medium text-gray-900"
+              >Country</label
+            >
+            <select
+              id="country"
+              name="country"
+              required
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            >
+              <option value="">Select a country</option>
+              <option value="1">Indonesia</option>
+              <option value="2">Malaysia</option>
+              <option value="3">Singapore</option>
+              <option value="4">Thailand</option>
+            </select>
+          </div>
+
+          <!-- Company Name -->
+          <div>
+            <label
+              for="companyName"
+              class="block mb-2 text-sm font-medium text-gray-900"
+              >Company Name</label
+            >
+            <input
+              type="text"
+              id="companyName"
+              name="companyName"
+              required
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="PT Example Company"
+            />
+          </div>
+
+          <!-- Full Name -->
+          <div>
+            <label
+              for="fullName"
+              class="block mb-2 text-sm font-medium text-gray-900"
+              >Full Name</label
+            >
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              required
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="John Doe"
+            />
+          </div>
+
+          <!-- Position -->
+          <div>
+            <label
+              for="position"
+              class="block mb-2 text-sm font-medium text-gray-900"
+              >Position</label
+            >
+            <input
+              type="text"
+              id="position"
+              name="position"
+              required
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="Project Manager"
+            />
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label
+              for="email"
+              class="block mb-2 text-sm font-medium text-gray-900"
+              >Email</label
+            >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="name@company.com"
+            />
+          </div>
+
+          <!-- Phone -->
+          <div>
+            <label
+              for="phone"
+              class="block mb-2 text-sm font-medium text-gray-900"
+              >Phone</label
+            >
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              required
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="081234567890"
+            />
+          </div>
+
+          <!-- Message -->
+          <div>
+            <label
+              for="message"
+              class="block mb-2 text-sm font-medium text-gray-900"
+              >Message</label
+            >
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="Write your message here..."
+            ></textarea>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          >
+            Submit Form
+          </button>
+
+          <!-- Status Message -->
+          <div id="statusMessage" class="hidden mt-4"></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Flowbite JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+
+    <!-- Form Submission Script -->
+    <script>
+      // Replace with your actual Google reCAPTCHA v3 site key
+      const RECAPTCHA_SITE_KEY = "6LeHnRcsAAAAAIbtoIZjq8F46uFlsg-kDxmXDtnn";
+
+      document
+        .getElementById("submissionForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const statusMessage = document.getElementById("statusMessage");
+          const submitButton = e.target.querySelector('button[type="submit"]');
+
+          // Disable submit button
+          submitButton.disabled = true;
+          submitButton.textContent = "Submitting...";
+
+          try {
+            // Get reCAPTCHA token
+            const recaptchaToken = await grecaptcha.execute(
+              RECAPTCHA_SITE_KEY,
+              { action: "submit" }
+            );
+
+            // Prepare form data
+            const formData = {
+              form_id: parseInt(document.getElementById("formId").value),
+              submission_data: {
+                country: document.getElementById("country").value,
+                companyName: document.getElementById("companyName").value,
+                fullName: document.getElementById("fullName").value,
+                position: document.getElementById("position").value,
+                email: document.getElementById("email").value,
+                phone: document.getElementById("phone").value,
+                message: document.getElementById("message").value,
+              },
+              recaptcha_token: recaptchaToken,
+            };
+
+            // Submit to API
+            const response = await fetch(
+              "http://ps.malvin.web.id/api/form-submission",
+              {
+                method: "POST",
+                headers: {
+                  "X-API-Key": "67CESqnsLQoYTW4weJRwj0ePhdAPlL5K",
+                  Origin: window.location.origin,
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+              }
+            );
+
+            const result = await response.json();
+
+            if (response.ok) {
+              statusMessage.className =
+                "p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50";
+              statusMessage.textContent = "Form submitted successfully!";
+              statusMessage.classList.remove("hidden");
+
+              // Reset form
+              e.target.reset();
+            } else {
+              throw new Error(result.message || "Submission failed");
+            }
+          } catch (error) {
+            statusMessage.className =
+              "p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50";
+            statusMessage.textContent = "Error: " + error.message;
+            statusMessage.classList.remove("hidden");
+          } finally {
+            // Re-enable submit button
+            submitButton.disabled = false;
+            submitButton.textContent = "Submit Form";
+          }
+        });
+    </script>
+  </body>
+</html>
